@@ -34,7 +34,7 @@ class TOOl():
 
 
         all_data = gd.data
-    #all_data = pd.read_pickle("/Users/qianyuyang/Desktop/paper/data/important/sentence_target_cut_already.pkl")
+    
         all_data = all_data.drop_duplicates(["sentence"])
         all_data["id"] = all_data.index
         ad = copy.deepcopy(all_data)

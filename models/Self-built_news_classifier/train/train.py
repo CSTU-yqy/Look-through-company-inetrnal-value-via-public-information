@@ -48,7 +48,7 @@ if __name__ == "__main__":
     
 
     """
-    seed代表我要做多少组验证，vote代表在产生每一组预测的过程中我要进行多少次模型来投票产生最终结果
+    The seed represents how many sets of validations I have to do, and the vote represents how many times I have to do the model voting to produce the final result in the process of generating each set of predictions
     """
     def trans_num(x):
         if x > 0:
@@ -68,7 +68,7 @@ if __name__ == "__main__":
             os.mkdir("min_df = %s"%min_df)
         org = BAGGING(sample_size = sample_size,org_address = "F:\paper\code\getCnki\handle_data\single_file\\new_predict\judge good bad news bert\sample_data.pkl")._org
         """
-        这里开始初始化
+        Start initialization here
         """
         #test_data_set = []
         train_data_set = []
@@ -79,7 +79,7 @@ if __name__ == "__main__":
             unanimous_result_set = [joblib.load("unanimous_result_%s_%s.pkl"%(min_df,seed)) for seed in range(sample_size)]
             unanimous_result_set = [i[i.label == -1] for i in unanimous_result_set]
             """
-            在这里做合并是因为如果需要初始化的话这里肯动是没有unanimous_result的
+            The merge is done here because if initialization is required, there is no unanimous_result here.
             """
             train_data_set = [pd.concat([train_data_set[i],unanimous_result_set[i][unanimous_result_set[i].label.isin(iteration_standard)].sample(len(train_data_set[i][train_data_set[i].label == -1]))]).drop_duplicates("sentence") for i in range(sample_size)]
             for seed in range(sample_size):
@@ -90,11 +90,11 @@ if __name__ == "__main__":
             bad_org = org[org.label == -1]
             for i in range(sample_size):
                 """
-                20220224 14：38修改
+                20220224 14:38 Modified
                 
                 """
                 """
-                20220224 15:16修改回原来的版本
+                20220224 15:16 Modify back to the original version
                 """
                 #good_train = good_org.sample(int(len(good_org) * 0.8)).drop_duplicates()
                 #bad_train = bad_org.sample(int(len(bad_org) * 0.8)).drop_duplicates()
@@ -114,7 +114,7 @@ if __name__ == "__main__":
         #p = [pool.apply_async(predict,args = (min_df,train_data_set[b],b,vote_num,)) for b in range(sample_size)]
         final_res = [sub_p.get() for sub_p in p]
         """
-        20220223 12:13修改
+        20220223 12:13 Modified
         
         """
         word_vector_list = [i[1] for i in final_res]
@@ -123,8 +123,3 @@ if __name__ == "__main__":
         
         final_word_vector.score = sum([i.score.apply(trans_num) for i in word_vector_list])
         final_word_vector.to_pickle("word_vector_final.pkl")
-        
-"""
-20220224 15:26修改
-"""
-        

@@ -17,13 +17,13 @@ def clean(sentence,used_name):
     global help_analysis1
     if len(help_analysis1.loc[help_analysis1["sentence"] == sentence,"used_name"].iloc[0]) > 1:
         
-        #这种情况说明带有其他干扰项
+        # This case description has other distractors
         gr = help_analysis1.loc[help_analysis1["sentence"] == sentence,"used_name"].iloc[0] - set(used_name)
         new_sentence = []
         for s in sentence.split("，"):
             if used_name in s:
                 
-                #如果这个句子的short_name在的话，就剔除其他干扰项的名字
+                #If the short_name of this sentence is there, remove the names of other distractors
                 for _gr in gr:
                     s = s.replace(_gr,"")
                     

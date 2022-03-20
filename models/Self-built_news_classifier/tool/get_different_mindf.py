@@ -1,5 +1,5 @@
 
-#这是一个输入词出现频率输出清洗完的总体数据的一个包
+#This is a package that outputs the cleaned overall data for the frequency of input words
 
 import pandas as pd
 import numpy as np
@@ -60,16 +60,16 @@ class GetData():
     
     
     def get_word_list(self):
-        #all_data = pd.read_pickle("/Users/qianyuyang/Desktop/paper/data/important/sentence_target_cut_already.pkl")
+        
         all_data = copy.deepcopy(self.all_data)
         all_data = all_data.drop_duplicates(["sentence"])
         all_data["id"] = all_data.index
         #all_data.text = all_data.sentence.apply(lambda x:self.cut_word(x,method = self.cut_method))
-        tf1 = TfidfVectorizer() # 使用默认参数
+        tf1 = TfidfVectorizer() #Use default parameters
         tf_matrix1 = tf1.fit_transform(all_data.text.tolist())
         all_word = set(tf1.get_feature_names())
         
-        tf2 = TfidfVectorizer(max_df=self.max_df,min_df=self.min_df) # 使用默认参数
+        tf2 = TfidfVectorizer(max_df=self.max_df,min_df=self.min_df) # Use default parameters
         tf_matrix2 = tf2.fit_transform(all_data.text.tolist())
         want_word = set(tf2.get_feature_names())
 
@@ -90,9 +90,6 @@ class GetData():
     @property
     def data(self):
         all_data = copy.deepcopy(self.all_data)
-        #all_data = pd.read_pickle("/Users/qianyuyang/Desktop/paper/data/important/sentence_target_cut_global_already.pkl")
-        #all_data = pd.read_pickle("/Users/qianyuyang/Desktop/paper/data/important/sentence_target_cut_already.pkl")
         kk = self.clean(all_data)
-        #kk.to_pickle("/Users/qianyuyang/Desktop/paper/data/important/sentence_target_cut_%s_already_mindf%s.pkl"%(self.cut_method,self.min_df))
-        #kk.to_pickle("/Users/qianyuyang/Desktop/paper/data/important/sentence_target_cut_already_mindf%s.pkl"%self.min_df)
+       
         return kk

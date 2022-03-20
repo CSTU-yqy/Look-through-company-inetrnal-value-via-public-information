@@ -4,7 +4,7 @@ from tqdm import tqdm
 import time
 from datetime import timedelta
 
-PAD, CLS = '[PAD]', '[CLS]'  # padding符号, bert中综合信息符号
+PAD, CLS = '[PAD]', '[CLS]'  # padding symbol, comprehensive information symbol in bert
 
 def build_predict_dataset(config,test_data_path):
 
@@ -72,7 +72,7 @@ class DatasetIterater(object):
         self.batch_size = batch_size
         self.batches = batches
         self.n_batches = len(batches) // batch_size
-        self.residue = False  # 记录batch数量是否为整数
+        self.residue = False  # Record whether the number of batches is an integer
         if len(batches) % self.n_batches != 0:
             self.residue = True
         self.index = 0
@@ -82,7 +82,7 @@ class DatasetIterater(object):
         x = torch.LongTensor([_[0] for _ in datas]).to(self.device)
         y = torch.LongTensor([_[1] for _ in datas]).to(self.device)
 
-        # pad前的长度(超过pad_size的设为pad_size)
+        # Length before pad (set to pad_size if it exceeds pad_size)
         seq_len = torch.LongTensor([_[2] for _ in datas]).to(self.device)
         mask = torch.LongTensor([_[3] for _ in datas]).to(self.device)
         return (x, seq_len, mask), y
@@ -119,7 +119,7 @@ def build_iterator(dataset, config):
 
 
 def get_time_dif(start_time):
-    """获取已使用时间"""
+    """Get the elapsed time"""
     end_time = time.time()
     time_dif = end_time - start_time
     return timedelta(seconds=int(round(time_dif)))

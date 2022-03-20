@@ -28,10 +28,10 @@ if __name__ == '__main__':
 
     
     """
-    数据加工
+    data processing
     """
     """
-    验证集和测试集要同分布
+    The validation set and test set should be the same distribution
     """
     sample_data = pd.read_pickle("F:\paper\code\getCnki\handle_data\single_file\\new_predict\judge good bad news bert\sample_data.pkl")
     sample_data.label = sample_data.label.map({-1:0,1:1})
@@ -53,26 +53,22 @@ if __name__ == '__main__':
 
     _dev_good = _dev[~_dev.code.isin(_train[_train.label == 0].code.unique().tolist())]
     _dev_bad = _dev[_dev.code.isin(_train[_train.label == 0].code.unique().tolist())]
-    #print(len(_train))
     for i in range(len(_dev_bad)):
         
         for j in range(10):
             dat = _dev_bad.iloc[i]
             dat["model_sentence"] = dat["model_sentence"] + "，" + choice(_dev_good.sample(1)["model_sentence"].iloc[0].split("，"))
             _dev = _dev.append(dat)
-    #print(len(_train))
     _dev = _dev.sample(frac = 1)
 
     _test_good = _test[~_test.code.isin(_train[_train.label == 0].code.unique().tolist())]
     _test_bad = _test[_test.code.isin(_train[_train.label == 0].code.unique().tolist())]
-    #print(len(_train))
     for i in range(len(_test_bad)):
         
         for j in range(10):
             dat = _test_bad.iloc[i]
             dat["model_sentence"] = dat["model_sentence"] + "，" + choice(_test_good.sample(1)["model_sentence"].iloc[0].split("，"))
             _test = _test.append(dat)
-    #print(len(_train))
     _test = _test.sample(frac = 1)
     
     for dd in ["_train","_test","_dev"]:
@@ -85,7 +81,7 @@ if __name__ == '__main__':
             f.close()
 
     """
-    数据加工结束
+    Data processing ends
     """
     print("finish")
 
@@ -104,7 +100,7 @@ if __name__ == '__main__':
     np.random.seed(1)
     torch.manual_seed(1)
     torch.cuda.manual_seed_all(1)
-    torch.backends.cudnn.deterministic = True  # 保证每次结果一样
+    torch.backends.cudnn.deterministic = True  # Make sure the result is the same every time
 
     start_time = time.time()
     print("Loading data...")

@@ -25,8 +25,8 @@ class NCN():
 
 
 
-    #cut_word是指切分文本的方式，这个版本里面支持三个版本
-    #jieba全搜索模式/结合已有的股票曾用名字典和停用词字典的jieba精确搜索模式/分字分字搜索
+    #cut_word refers to the way to cut text, this version supports three versions
+    #jieba full search mode / jieba exact search mode combined with existing stock used name dictionary and stop word dictionary / word-by-word search
     def cut_word(self,method,text):
 
         word_list = list()

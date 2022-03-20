@@ -1,4 +1,4 @@
-#这里尝试剔除只出现一次的一些词
+
 import pandas as pd
 import numpy as np
 import time
@@ -28,12 +28,6 @@ from bidict import bidict
 warnings.filterwarnings("ignore")
 import joblib
 
-
-
-#file_handle = open("exp.txt","a")
-# sample_size = 10
-# vote_num = 5
-# process_num = sample_size
 def trans_num(x):
         if x > 0:
             return 1
@@ -42,7 +36,7 @@ def trans_num(x):
         else:
             return 0
 """
-org在本样本中一直代表初始的训练样本
+org has always represented the initial training sample in this sample
 
 """
 def predict(min_df,org,seed,vote_num = 7):
@@ -58,24 +52,24 @@ def predict(min_df,org,seed,vote_num = 7):
     all_data = all_data.drop_duplicates(["sentence"])
     all_data["id"] = all_data.index
     ##################################################################################################################
-    #这里加工整体的tf-idf矩阵
+    #Process the overall tf-idf matrix here
     
     all_tf = TfidfVectorizer()
     #############################################
     all_tf_parse_matrix = all_tf.fit_transform(all_data.text.tolist())
-    #######可以省略这一步体现系数矩阵的优越性##############
+    #######This step can be omitted to reflect the superiority of the coefficient matrix##############
     word_news_parse_matrix = csr_matrix((np.array([1] * len(all_tf_parse_matrix.data)),all_tf_parse_matrix.indices,all_tf_parse_matrix.indptr),shape = all_tf_parse_matrix.shape)
     all_word_list = all_tf.get_feature_names()
 
     """
-    这里先分出测试集和训练集test_org和grand_org
+    Here we first separate the test set and training set test_org and grand_org
     """
     iteration_result_pool = []
     org_pool = []
     word_vector_sum = pd.DataFrame()
     for vote in range(vote_num):
         """
-        这里再根据训练集划分出训练集和验证集train_org,test_org
+        Here, the training set and the validation set train_org, test_org are divided according to the training set
         """
         test_org = grand_org.sample(int(0.2 * len(grand_org)),replace = False)
         train_org = grand_org[grand_org.id.isin(test_org.id.tolist()) == False]
@@ -93,7 +87,7 @@ def predict(min_df,org,seed,vote_num = 7):
             print("_____________________________________\n")
             
             """
-            每一个seed的每一个vote都需要进行参数学习来获得最佳步长，这一步就是加载出目前的sample/vote中前面不同步长在验证集上的表现
+            Each vote of each seed needs to perform parameter learning to obtain the best step size. This step is to load the performance of the previous different steps in the current sample/vote on the validation set
             """
             with open("min_df = %s/para_dict/para_dict_%s.pkl"%(min_df,seed),"rb") as f:
                 param_dict = pickle.load(f)
@@ -107,7 +101,7 @@ def predict(min_df,org,seed,vote_num = 7):
             org = k["prediction"]
             word_vec = k["word_vector"]
             """
-            这里会显示负面新闻的总数量
+            This will show the total number of negative news
             """
             print("_____%s_________"%len(org[org.label == -1]))
             
@@ -123,7 +117,7 @@ def predict(min_df,org,seed,vote_num = 7):
         stat = pickle.load(open("min_df = %s/para_dict/para_dict_%s.pkl"%(min_df,seed),"rb"))
         best_key = max(stat,key = stat.get)
         """
-        在获得了best步长之后有一个优化的地方是将验证集扔回去用全部的grand_org进行训练
+        After getting the best step size, there is an optimization that throws the validation set back for training with all grand_org
         """
         again_result = Model(org = TOOl().clean(min_df = min_df,org = grand_org),line_standard = best_key,min_df = min_df).result
         iteration_word_vector = again_result["word_vector"]
@@ -143,12 +137,11 @@ def predict(min_df,org,seed,vote_num = 7):
         
         seed_org["label"] = np.array(seed_org["label"]) + np.array(org_pool[i]["label"])
         seed_iteration_result["label"] = np.array(seed_iteration_result["label"]) + np.array(iteration_result_pool[i]["label"])
-    #写的方式
 
 
     seed_org["label"] = seed_org["label"].apply(trans_num)
     """
-    2022年0223 13：29修改，解决pickle memory error
+    2022 0223 13:29 Modified to resolve pickle memory error
     """
     joblib.dump(seed_org,"predict_%s_%s.pkl"%(min_df,seed))
     #seed_org.to_pickle("predict_%s_%s.pkl"%(min_df,seed))

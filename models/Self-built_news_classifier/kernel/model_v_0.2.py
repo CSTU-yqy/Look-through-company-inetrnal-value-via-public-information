@@ -38,12 +38,12 @@ class Model():
         self.all_data = self.all_data.drop_duplicates(["sentence"])
         self.all_data["id"] = self.all_data.index
         ##################################################################################################################
-        #这里加工整体的tf-idf矩阵
+        #Process the overall tf-idf matrix here
         
         self.all_tf = TfidfVectorizer()
         #############################################
         self.all_tf_parse_matrix = self.all_tf.fit_transform(self.all_data.text.tolist())
-        #######可以省略这一步体现系数矩阵的优越性##############
+        #######This step can be omitted to reflect the superiority of the coefficient matrix##############
         self.word_news_parse_matrix = csr_matrix((np.array([1] * len(self.all_tf_parse_matrix.data)),self.all_tf_parse_matrix.indices,self.all_tf_parse_matrix.indptr),shape = self.all_tf_parse_matrix.shape)
         self.all_word_list = self.all_tf.get_feature_names()
         
@@ -58,7 +58,7 @@ class Model():
         word_vec = pd.DataFrame(columns = ["word","score"])
         word_vec.word = self.all_word_list
         #word_vec.word = tf.get_feature_names()
-        #############可以优化a.sum(axis = 0)*label###################
+        ############# can optimize a.sum(axis = 0)*label####################
         word_vec.score = self.all_tf_parse_matrix[[self.mp[i] for i in self.org.id]].T.dot(np.array(self.org.label.tolist())) / np.array(self.word_news_parse_matrix[[self.mp[i] for i in self.org.id]].sum(axis = 0))[0]
         #word_vec.score = np.array(org.label) * np.array(all_tf_parse_matrix[[mp[i] for i in org.id]].sum(axis = 0))[0] /np.array(word_news_parse_matrix[[mp[i] for i in org.id]].sum(axis = 0))[0]
         ############################################################
@@ -87,7 +87,7 @@ class Model():
                 labels = self.org.label
 
                 """
-                预测是用局部矩阵进行预测的
+                Predictions are made with a local matrix
                 """
                 tf = TfidfVectorizer()
                 train_features = tf.fit_transform(self.org.text.tolist())
@@ -104,7 +104,7 @@ class Model():
                 #word_vec.score = np.matmul(np.array(org.label).T,tf_matrix.toarray())
                 word_vec.word = self.all_word_list
                 #word_vec.word = tf.get_feature_names()
-                ###################可以优化，用a.sum(axis = 0)*label########################
+                ################### can be optimized with a.sum(axis = 0)*label################## #######
                 #word_vec.score = np.matmul(np.array(org.label).T,all_tf_matrix[[mp[i] for i in org.id]])
                 #word_vec.score = np.array(org.label) * np.array(all_tf_parse_matrix[[mp[i] for i in org.id]].sum(axis = 0))[0] /np.array(word_news_parse_matrix[[mp[i] for i in org.id]].sum(axis = 0))[0]
                 word_vec.score = self.all_tf_parse_matrix[[self.mp[i] for i in self.org.id]].T.dot(np.array(self.org.label.tolist())) / np.array(self.word_news_parse_matrix[[self.mp[i] for i in self.org.id]].sum(axis = 0))[0]
@@ -116,7 +116,7 @@ class Model():
                 break
         
         """
-        注意顺序不要反
+        Be careful not to reverse the order
         """
         iteration_result = pd.merge(ad,self.org[["id","label"]],on = "id",how = "left").fillna(0)
         self.org = pd.merge(ad,self.org[["id","label"]],on = "id",how = "left").fillna(1)
