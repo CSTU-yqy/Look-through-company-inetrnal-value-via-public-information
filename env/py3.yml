@@ -1,0 +1,37 @@
+name: example_py3
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - perl
+  - sphinx=1.7.2
+  - spacy
+  - nltk
+  - pytest
+  - flaky
+  - pytest-cov
+  - pip:
+    - selenium
+    - os
+    - pandas
+    - numpy
+    - time
+    - multiprocessing
+    - requests
+    - logging
+    - pickle
+    - json
+    - string
+    - zhon
+    - threading
+    - functools
+    - re
+    - warnings
+    - jieba
+    - sklearn
+    - scipy
+    - copy
+    - bidict
+    - joblib
+    - torch
