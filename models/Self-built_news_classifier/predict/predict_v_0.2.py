@@ -88,7 +88,7 @@ def predict(min_df,org,seed,vote_num = 7):
             print("_____________________________________\n")
             
             """
-            每一个seed的每一个vote都需要进行参数学习来获得最佳步长，这一步就是加载出目前的sample/vote中前面不同步长在验证集上的表现
+            Each vote of a seed requires parameter learning to obtain the best step size, which is the performance of the current sample/vote in each step on the validation set.
             """
             with open("min_df = %s/para_dict/para_dict_%s.pkl"%(min_df,seed),"rb") as f:
                 param_dict = pickle.load(f)
