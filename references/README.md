@@ -1,4 +1,4 @@
-Our research is inspired by these following paper, we could only list a few representative ones before we finish our wirking paper:
+Our research is inspired by these following paper, we could only list a few representative ones before we finish our working paper:
 
 [[1] Calomiris C W, Mamaysky H. How news and its context drive risk and returns around the world[J]. Journal of Financial Economics, 2019.](https://www.nber.org/system/files/working_papers/w24430/w24430.pdf)
 
