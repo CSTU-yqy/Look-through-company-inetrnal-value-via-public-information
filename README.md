@@ -20,9 +20,9 @@ Project Organization
     │
     ├── models                          <- Trained and serialized models, model predictions, model summaries
     │   ├── DL_news_classifier          <- Popular deep learning methods for chinese news classification(BERT,ERNIE,TEXTCNN,RCNN...)         
-    │   └── Self-built_news_classifier  <- The classifier we built for our dataset
+    │   └── Self-built_news_classifier  <- The classifier I built for my dataset
     │
-    ├── notebooks                       <- Jupyter notebooks we used for analysis
+    ├── notebooks                       <- Jupyter notebooks I used for analysis
     │   └── Staged_results_202202.ipynb      
     │                         
     │
@@ -60,11 +60,11 @@ Project Organization
 --------
 
 ## WHY BAD NEWS?
-We believe news data can help us learn more about the real situation of the company. The company news released by authoritative media shields the noise caused by false information and subjective inference, and can most directly show the micro details of the company. Good news, bad news, even fake news can be useful for  information gain. How to choose the cut-in angle is the most efficient?
+I believe news data can help us learn more about the real situation of the company. The company news released by authoritative media shields the noise caused by false information and subjective inference, and can most directly show the micro details of the company. Good news, bad news, even fake news can be useful for  information gain. How to choose the cut-in angle is the most efficient?
 
 ![picture 1](./reports/figures/where%20the%20ideas%20com%20from.png)
 
-As can be seen from the above figure, most of points are in the area above the diagonal, it means the time point when the relevant indicators of negative news send out signals is earlier than the time point when the company officially announces the major changes. We guess maybe it is a good choice to cut in from the perspective of bad news.
+As can be seen from the above figure, most of points are in the area above the diagonal, it means the time point when the relevant indicators of negative news send out signals is earlier than the time point when the company officially announces the major changes. I guess maybe it is a good choice to cut in from the perspective of bad news.
 
 ## WHERE CAN WE GET OUR DATA SOURCES AND WHY WE CHOOSE IT?
 1. About CNKI Full-text Database of Important Chinese Newspapers
@@ -72,11 +72,11 @@ CNKI is the most authoritative academic data platform in China
 The database contains 658 newspaper(168 central level + 490 province level)
 from 31 province, covering all industries and listed companies
 
-2. About how we get our data sources
-CNKI has a good defense against web crawlers, so we overcame a lot of technical difficulties to get this data soures
-We provide a demo of our crawlers(./crawler/demo.py)
+2. About how I get our data sources
+CNKI has a good defense against web crawlers, so I overcame a lot of technical difficulties to get this data soures
+I provide a demo of our crawlers(./crawler/demo.py)
 
-3. Statistical description of the data
+3. Statistical description of the raw data
 ------------
     from province prospective
         coverage of province :                              31 / 31
@@ -97,7 +97,28 @@ We provide a demo of our crawlers(./crawler/demo.py)
         article amount of one company(std) :                399.6
 ------------
 
-4. All compamy metircs data we select
+4. Statistical description of the data I use to do empirical study
+------------
+    from province prospective
+        coverage of province :                              31 / 31
+        newspaper  amount in one province(min) :            4(Hainan)
+        newsspapers amount in one province(max) :           30(Sichuan)
+        newsspaper amount in one province(mean) :           15.8
+    from article prospective
+        article amount total :                              432812
+        sentence amount total :                             35948282  
+    from company prospective
+        coverage of company :                               4101 / 4602
+        article amount of one company(min) :                1
+        article amount of one company(max) :                9342
+        article amount of one company(mean) :               105.6
+        article amount of one company(25% quantile) :       5
+        article amount of one company(50% quantile) :       15
+        article amount of one company(75 quantile) :        54
+        article amount of one company(std) :                399.6
+------------
+
+5. All compamy metircs data I select
 ------------
     ---------------------------------------------------------------------
     Comapny metirc name                       | Category
@@ -147,8 +168,8 @@ We provide a demo of our crawlers(./crawler/demo.py)
 ------------
 
 ## HOW TO FIND BAD NEWS?
-We try deep learning models and self-built models, popular DL models did not have a good performance on our dataset, because chinese word in the financial context has this uniqueness, we need to build a lexiocn and our own model to slove this problem.
-We mainly did the three steps to build our own classifier(we cannot show model details before we finish this working paper, but we provide demo in ./models/Self-built_news_classifier)
+I try deep learning models and self-built models. Popular DL(deep learnig) models did not have a good performance on our dataset, because chinese word in the financial context has this uniqueness, I need to build a lexiocn and our own model to slove this problem.
+I mainly did the three steps to build our own classifier(I cannot show model details before I finish this working paper, but I provide demo in ./models/Self-built_news_classifier)
 ### clean
 
 ![picture 2](./reports/figures/clean%20data.png)
@@ -167,17 +188,17 @@ We mainly did the three steps to build our own classifier(we cannot show model d
 
 ## HOW BAD NEWS WORKS?
 
-Inspired by incredible work by Calomiris C W & Mamaysky H(2019), we guess we could classifying bad news using unsupervised learning method and infer topics by drawing word clouds.
+Inspired by incredible work by Calomiris C W & Mamaysky H(2019), I guess I could classifying bad news using unsupervised learning method and infer topics by drawing word clouds.
 
 ### cluster result
 
 ![picture 6](./reports/figures/cluster%20result.png)
 
-It can be seen that although the number of negative news is large, it still shows a trend of gathering in the top 9 categories. We can't directly show what each type of negative topic is before our paper is finished, but it can be clearly seen that although there are various types of negative news, their classification is actually very small.
+It can be seen that although the number of negative news is large, it still shows a trend of gathering in the top 9 categories. I can't directly show what each type of negative topic is before our paper is finished, but it can be clearly seen that although there are various types of negative news, their classification is actually very small.
 
-Now we have different types of bad news and different types of company metrics, we could do something cool. Maybe we could answer the question---"Bad news can bring inforamtion gain but how does it work?"
+Now I have different types of bad news and different types of company metrics, I could do something cool. Maybe I could answer the question---"Bad news can bring inforamtion gain but how does it work?"
 
-We believe that negative news is the information leakage of the deterioration of the microscopic situation of the enterprise, so different types of negative news represent the deterioration path of the enterprise in different ways, it should appear that the measurement indicators of different aspects of the enterprise have good feedback on the indicators based on the synthesis of negative news. However, their sensitivities will vary due to different pathways of action
+I believe that negative news is the information leakage of the deterioration of the microscopic situation of the enterprise, so different types of negative news represent the deterioration path of the enterprise in different ways, it should appear that the measurement indicators of different aspects of the enterprise have good feedback on the indicators based on the synthesis of negative news. However, their sensitivities will vary due to different pathways of action
 
 ### Statistical test results
 
@@ -193,4 +214,9 @@ We believe that negative news is the information leakage of the deterioration of
 
 ![picture 9](./reports/figures/how%20bad%20news%20helps%20learn%20more---sensitivity.png)
 
-The results of the experiment are consistent with our conjecture. Our working paper will be finished this year, so stay tuned！！！
+I am testing if results of the experiment are consistent with our conjecture. My working paper will be finished this year, so stay tuned！！！
+
+
+
+
+# Dream is a validation set, if we are underfitting, learn more and try more to be a "complicated model", if we are overfitting 
