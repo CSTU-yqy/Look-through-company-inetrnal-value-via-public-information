@@ -168,7 +168,7 @@ I provide a demo of our crawlers(./crawler/demo.py)
 ------------
 
 ## HOW TO FIND BAD NEWS?
-I try deep learning models and self-built models. Popular DL(deep learnig) models did not have a good performance on our dataset, because chinese word in the financial context has this uniqueness, I need to build a lexiocn and our own model to slove this problem.
+I try deep learning models and self-built models. Popular DL(deep learnig) models did not have a good performance on our dataset, because chinese word in the financial context has this uniqueness, I need to build a lexicon and our own model to slove this problem.
 I mainly did the three steps to build our own classifier(I cannot show model details before I finish this working paper, but I provide demo in ./models/Self-built_news_classifier)
 ### clean
 
@@ -185,6 +185,8 @@ I mainly did the three steps to build our own classifier(I cannot show model det
 ### model perfomance
 
 ![picture 5](./reports/figures/model%20performance.png)
+
+![picture 10](./reports/figures/model%20performance.png)
 
 ## HOW BAD NEWS WORKS?
 
@@ -214,7 +216,7 @@ I believe that negative news is the information leakage of the deterioration of 
 
 ![picture 9](./reports/figures/how%20bad%20news%20helps%20learn%20more---sensitivity.png)
 
-I am testing if results of the experiment are consistent with our conjecture. My working paper will be finished this year, so stay tuned！！！
+I am testing if results of the experiment are consistent with my conjecture. My working paper will be finished this year, so stay tuned！！！
 
 
 
