@@ -188,7 +188,7 @@ I mainly did the three steps to build our own classifier(I cannot show model det
 
 #### model performance update(20220615)
 
-![picture 10](./reports/figures/learning%20curve.pdf)
+![picture 10](./reports/figures/learning_curve.png)
 
 ## HOW BAD NEWS WORKS?
 
