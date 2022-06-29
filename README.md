@@ -76,7 +76,7 @@ from 31 province, covering all industries and listed companies
 CNKI has a good defense against web crawlers, so I overcame a lot of technical difficulties to get this data soures
 I provide a demo of our crawlers(./crawler/demo.py)
 
-3. Statistical description of the raw data
+3. Raw data description
 ------------
     from province prospective
         coverage of province :                              31 / 31
@@ -97,25 +97,20 @@ I provide a demo of our crawlers(./crawler/demo.py)
         article amount of one company(std) :                399.6
 ------------
 
-4. Statistical description of the data I use to do empirical study
+4. Cleaned data description(data I use to do empirical study)
 ------------
-    from province prospective
-        coverage of province :                              31 / 31
-        newspaper  amount in one province(min) :            4(Hainan)
-        newsspapers amount in one province(max) :           30(Sichuan)
-        newsspaper amount in one province(mean) :           15.8
-    from article prospective
-        article amount total :                              432812
-        sentence amount total :                             35948282  
-    from company prospective
-        coverage of company :                               4101 / 4602
-        article amount of one company(min) :                1
-        article amount of one company(max) :                9342
-        article amount of one company(mean) :               105.6
-        article amount of one company(25% quantile) :       5
-        article amount of one company(50% quantile) :       15
-        article amount of one company(75 quantile) :        54
-        article amount of one company(std) :                399.6
+                                                                                            bad news        not bad news        total
+    Quantity :                                                                              20074           166386              186828
+    Average length of news :                                                                71.50922        65.647488           66.26254
+    Percentage of provincial and ministerial news :                                         53.601%         53.756%             53.748%
+    Percentage of Central-level News :                                                      44.730%         45.529%             45.434%
+    Number of listed companies involved :                                                   1704            3935                3942
+    Number of news items containing words from the negative lexicon \ percentage :          19047\94.88%    13954\8.39%         33298\17.82%
+    Number of news items that do not contain words in the negative lexicon \ percentage :   1027\5.12%      152432\91.61%       153530\82.18%
+    Maximum news length :                                                                   223             223                 223
+    Minimum news length :                                                                   6               6                   6
+    Single stock involved in the maximum number of news \ stock code :                      826\300372.SZ   3659\000858.SZ      3987\000858.SZ
+    Minimum number of news involving a single stock \ Stock code :                          1\000008.SZ     1\000005.SZ         1\000005.SZ
 ------------
 
 5. All compamy metircs data I select
