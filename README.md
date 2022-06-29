@@ -218,5 +218,11 @@ I am testing if results of the experiment are consistent with our conjecture. My
 
 
 
-
-# Dream is a validation set, if we are underfitting, learn more and try more to be a "complicated model", if we are overfitting 
+------------
+    Dream is a validation set.
+    If we are underfitting, learn more to be a "complicated model".
+    If we are overfitting, try more to "sample" or just learn to be "simple".
+    Training is not to limit but to ascend, both for modeling and for our lifes. 
+                                                                                  
+                                                              ---qianyu 20220531
+------------
