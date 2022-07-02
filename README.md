@@ -60,23 +60,25 @@ Project Organization
 --------
 
 ## WHY BAD NEWS?
-I believe news data can help us learn more about the real situation of the company. The company news released by authoritative media shields the noise caused by false information and subjective inference, and can most directly show the micro details of the company. Good news, bad news, even fake news can be useful for  information gain. How to choose the cut-in angle is the most efficient?
+
+I believe news data can help us learn more about the real situation of the company. The company news released by authoritative media shields the noise caused by false information and subjective inference, and can most directly show the micro details of the company. Good news, bad news, even fake news can be useful for information gain. How to choose the cut-in angle which is the most efficient?
 
 ![picture 1](./reports/figures/where%20the%20ideas%20com%20from.png)
 
 As can be seen from the above figure, most of points are in the area above the diagonal, it means the time point when the relevant indicators of negative news send out signals is earlier than the time point when the company officially announces the major changes. I guess maybe it is a good choice to cut in from the perspective of bad news.
 
 ## WHERE CAN WE GET OUR DATA SOURCES AND WHY WE CHOOSE IT?
-1. About CNKI Full-text Database of Important Chinese Newspapers
-CNKI is the most authoritative academic data platform in China
-The database contains 658 newspaper(168 central level + 490 province level)
-from 31 province, covering all industries and listed companies
 
-2. About how I get our data sources
-CNKI has a good defense against web crawlers, so I overcame a lot of technical difficulties to get this data soures
-I provide a demo of our crawlers(./crawler/demo.py)
+1. **CNKI Full-text Database of Important Chinese Newspapers**
+
+CNKI is the most authoritative academic data platform in China. The database contains **658** newspapers (**168 central level** + **490 province level**) from 31 provinces, covering all industries and nearly all the listed companies.
+
+2. How I get our data sources
+
+CNKI has a good defense against web crawlers, so I overcame a lot of technical difficulties to get this data source. This script provides a demo of our crawlers: **./crawler/demo.py**.
 
 3. Raw data description
+
 ------------
     from province prospective
         coverage of province :                              31 / 31
@@ -98,6 +100,7 @@ I provide a demo of our crawlers(./crawler/demo.py)
 ------------
 
 4. Cleaned data description(data I use to do empirical study)
+
 ------------
                                                                                             bad news        not bad news        total
     Quantity :                                                                              20074           166386              186828
@@ -114,6 +117,7 @@ I provide a demo of our crawlers(./crawler/demo.py)
 ------------
 
 5. All compamy metircs data I select
+
 ------------
     ---------------------------------------------------------------------
     Comapny metirc name                       | Category
@@ -163,13 +167,14 @@ I provide a demo of our crawlers(./crawler/demo.py)
 ------------
 
 ## HOW TO FIND BAD NEWS?
-I try deep learning models and self-built models. Popular DL(deep learnig) models did not have a good performance on our dataset, because chinese word in the financial context has this uniqueness, I need to build a lexicon and our own model to slove this problem.
-I mainly did the three steps to build our own classifier(I cannot show model details before I finish this working paper, but I provide demo in ./models/Self-built_news_classifier)
+
+3. I try deep learning models and self-built models. Popular DL (deep learning) models did not have a good performance on our dataset, because Chinese words in the financial context have this uniqueness. I needed to build a lexicon and our own model to solve this problem. We can divide all of the steps into three different stages to build our own classifier (I cannot show model details before I finish this working paper, but can provide a demo in **./models/Self-built_news_classifier**.
+
 ### clean
 
 ![picture 2](./reports/figures/clean%20data.png)
 
-### pretrain
+### build bad news lexicon
 
 ![picture 3](./reports/figures/pretrain.png)
 
@@ -187,17 +192,17 @@ I mainly did the three steps to build our own classifier(I cannot show model det
 
 ## HOW BAD NEWS WORKS?
 
-Inspired by incredible work by Calomiris C W & Mamaysky H(2019), I guess I could classifying bad news using unsupervised learning method and infer topics by drawing word clouds.
+Inspired by the incredible work of Calomiris C W & Mamaysky H (2019), I guess I could classify bad news using unsupervised learning methods and infer topics by drawing word clouds.
 
 ### cluster result
 
 ![picture 6](./reports/figures/cluster%20result.png)
 
-It can be seen that although the number of negative news is large, it still shows a trend of gathering in the top 9 categories. I can't directly show what each type of negative topic is before our paper is finished, but it can be clearly seen that although there are various types of negative news, their classification is actually very small.
+It can be seen that although the number of negative news items is large, it still shows a trend of gathering in the top 9 categories. Before our paper is finished, I can't directly show what each type of negative topic is, but it can clearly be seen that although there are various types of negative news, their classification is actually very small.
 
-Now I have different types of bad news and different types of company metrics, I could do something cool. Maybe I could answer the question---"Bad news can bring inforamtion gain but how does it work?"
+Now that I have different types of bad news and different types of company metrics, I could do something cool. Maybe I could answer the question: "Bad news can bring information gain but how does it work?"
 
-I believe that negative news is the information leakage of the deterioration of the microscopic situation of the enterprise, so different types of negative news represent the deterioration path of the enterprise in different ways, it should appear that the measurement indicators of different aspects of the enterprise have good feedback on the indicators based on the synthesis of negative news. However, their sensitivities will vary due to different pathways of action
+I believe that negative news is the information leakage of the deterioration of the microscopic situation of the enterprise. Different types of negative news represent the deterioration path of the enterprise in different ways. Based on our hypothesis, it should appear that the measurement indicators of different aspects of the enterprise have good feedback on the indicators based on the synthesis of negative news. However, their sensitivities will vary due to different pathways of action.
 
 ### Statistical test results
 
@@ -213,7 +218,7 @@ I believe that negative news is the information leakage of the deterioration of 
 
 ![picture 9](./reports/figures/how%20bad%20news%20helps%20learn%20more---sensitivity.png)
 
-I am testing if results of the experiment are consistent with my conjecture. My working paper will be finished this year, so stay tuned！！！
+I am testing if the results of the experiment are consistent with my conjecture. My working paper will be finished this year, so stay tuned!!!
 
 
 
