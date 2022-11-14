@@ -1,4 +1,4 @@
-bad news helps learn more
+Look-through company's inetrnal value through public information
 ==============================
 
 Project Organization
@@ -59,7 +59,7 @@ Project Organization
 
 --------
 
-## WHY BAD NEWS?
+## WHY PUBLIC NEWS?
 
 I believe news data can help us learn more about the real situation of the company. The company news released by authoritative media shields the noise caused by false information and subjective inference, and can most directly show the micro details of the company. Good news, bad news, even fake news can be useful for information gain. How to choose the cut-in angle which is the most efficient?
 
